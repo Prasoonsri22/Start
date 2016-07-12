@@ -1,0 +1,39 @@
+im port java.util.* ;
+im port javax.mail.* ;
+im port javax.mail.internet.* ;
+im port javax.activation.* ;
+public class SendEm ail
+{
+public static void main(String [] args)
+{
+// Recipient's em ail ID needs to be m entioned.
+String to = "Prasoonsri22@gmail.com ";
+// Sender's em ail ID needs to be m entioned
+String from = "sudhir429@rediffmail.com ";
+// Assum ing you are sending em ail from localhost
+String host = "localhost";
+// Get system properties
+Properties properties =System.getProperties();
+// Setup m ail server
+properties.setProperty("mail.sm tp.host",host);
+// Get the default Session object.
+Session session = Session.getDefaultInstance(properties);
+try{
+// Create a default Mim eMessage object.
+Mim eMessage message = new MimeMessage(session);
+// Set From : header field of the header.
+m essage.setFrom (new InternetAddress(from ));
+// Set To: header field of the header.
+m essage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+// Set Subject: header field
+m essage.setSubject("This is the Subject Line!");
+// Now set the actual m essage
+m essage.setText("This is actual m essage");
+// Send m essage
+Transport.send(m essage);
+System .out.println("Sent m essage successfully....");
+}catch (MessagingException m ex) {
+m ex.printStackTrace();
+}
+}
+}
